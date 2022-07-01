@@ -1,13 +1,23 @@
-const cadastro = () => document.getElementById('ativar').classList.add('adiciona-cliente-ativo');
-const fechaCadastro = () => {
+document.getElementById('cadastrarCliente').addEventListener('click', cadastro);
+
+function cadastro () {
+    document.getElementById('ativar').classList.add('adiciona-cliente-ativo');
+}
+    
+document.getElementById('fechar').addEventListener('click', fechaCadastro);
+
+function fechaCadastro() {
     limpaFormulario()
     document.getElementById('ativar').classList.remove('adiciona-cliente-ativo');
 }
+
 const forms = document.getElementById('form');
 
 
-document.getElementById('cadastrarCliente').addEventListener('click', cadastro);
-document.getElementById('fechar').addEventListener('click', fechaCadastro);
+document.getElementById('cancelar').addEventListener('click', cancelaCadastro);
+function cancelaCadastro() {
+    fechaCadastro();
+}
 
 function getLocalStorage() {
     if(JSON.parse(localStorage.getItem("idCliente"))){
@@ -53,8 +63,7 @@ function limpaFormulario(){
     inputCampos.forEach(campo => campo.value = '');
 }
 
-const botaoSalvar = document.getElementById('salvar');
-botaoSalvar.addEventListener('click', adicionaCliente);
+document.getElementById('salvar').addEventListener('click', adicionaCliente);
 
 function adicionaCliente () {
     if(campoValido()){
@@ -90,12 +99,11 @@ function criaLinhaTabela(client, index) {
         </td>
     `;
     document.querySelector('#tabela-cliente>tbody').appendChild(novaLinha);
-     
 }
 
 function limpaTabela() {
     const linhas = document.querySelectorAll('#tabela-cliente>tbody tr');
-    linhas.forEach(linha => linha.parentNode.removeChild(linha))
+    linhas.forEach(linha => linha.parentNode.removeChild(linha));
 }
 
 function atualizaTabela() {
@@ -134,5 +142,19 @@ function editarEExcluir(event) {
 }
 atualizaTabela();
 
+function mascara(o,f){
+    v_obj = o
+    v_fun = f
+    setTimeout("execmascara()",1)
+}
 
+function execmascara(){
+    v_obj.value = v_fun(v_obj.value)
+}
 
+function telefone(v){
+    v=v.replace(/\D/g,"")                
+    v=v.replace(/^(\d\d)(\d)/g,"($1) $2") 
+    v=v.replace(/(\d{5})(\d)/,"$1-$2")   
+    return v
+}

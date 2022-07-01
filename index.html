@@ -43,7 +43,7 @@
                 <form class="input-adiciona-cliente" id="form">
                     <input type="text" id="nome" class="input-cliente"  data-index="novo" placeholder="Nome do Cliente" required>
                     <input type="email"id="email" class="input-cliente"  placeholder="E-mail do Cliente" required>
-                    <input type="text" id="celular" class="input-cliente" maxlength="15" placeholder="(__) _____-____" required>
+                    <input type="text" id="celular" class="input-cliente" onkeypress="mascara(this, telefone)"  maxlength="15" placeholder="(__) _____-____" required>
                     <input type="text" id="cidade" class="input-cliente" placeholder="Cidade do Cliente" required>
                 </form>
                 <footer class="footer-novo-cliente">
